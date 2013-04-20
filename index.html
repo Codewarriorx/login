@@ -1,0 +1,23 @@
+<head>
+  <title>login</title>
+</head>
+
+<body>
+  {{> main}}
+</body>
+
+<template name="main">
+	  {{#if loggedIn}}
+		{{> hello}}
+	  {{else}}
+		{{> loginForm}}
+		{{> regForm}}
+	  {{/if}}
+</template>
+
+<template name="hello">
+  <h1>Welcome {{userName}}</h1>
+  <form>
+  	<a href="#" id="logout">Logout</a>
+  </form>
+</template>
