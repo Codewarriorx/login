@@ -28,45 +28,17 @@ Meteor.methods({
 			throw new Meteor.Error(413, "Missing password!");
 		}
 		
+		var encryptedPw = CryptoJS.SHA1(credentials.password);
 		var cursor = Users.find({username: credentials.username});
 		if(cursor.count() > 0){
 			data = cursor.fetch();
 			
-			// if(data[0].password == encryptedPw){
-			// 	console.log('Logging in user ' + credentials.username);
+			if(data[0].password == encryptedPw){
+				console.log('Logging in user ' + credentials.username);
 				return true;
-			// }
+			}
 		}
 		return false;
-	},
-	login: function(credentials){
-		Meteor.call('isUser', credentials, function(e, result){
-			if(result){
-				var encryptedPw = CryptoJS.SHA1(credentials.password);
-				var cursor = Users.find({username: credentials.username});
-				if(cursor.count() > 0){
-					data = cursor.fetch();
-					
-					if(data[0].password == encryptedPw){
-						console.log('Logging in user ' + credentials.username);
-						var token;
-						Meteor.call('genToken', credentials.username, function(e, result){
-							token = result;
-						});
-						return token;
-					}
-					else{
-						return false;
-					}
-				}
-				else{
-					return false;
-				}
-			}
-			else{
-				return false;
-			}
-		});
 	},
 	getIP: function(client){
 		console.log(client);

@@ -1,4 +1,4 @@
-// Users = new Meteor.Collection('users');
+Users = new Meteor.Collection('users');
 // LoggedIn = new Meteor.Collection('loggedIn');
 
 Session.set('error', {});

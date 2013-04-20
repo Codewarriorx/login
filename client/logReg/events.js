@@ -8,39 +8,8 @@ Template.loginForm.events = {
 			username: tpl.find('input[name="username"]').value,
 			password: tpl.find('input[name="password"]').value
 		};
-		console.log('Hey: ');
-		console.log(login);
-		Meteor.call('login', login, function(e, result){
-			console.log(result);
-			if(result != false){
-				Meteor.call('setSessions', result, login.username);
-				Meteor.call('setError', 'badCredentials', false);
-				console.log('good login');
-			}
-			else{
-				// error
-				if(err){
-					alert('Could not login '+ err.reason);
-				}
-				Meteor.call('setError', 'badCredentials', true);
-				console.log('bad login');
-			}
-			// return true;
-		});
-		// Meteor.call('login', login, function(e, result){});
-		/*Meteor.call('logUserIn', login, function(err, result){
-			if(err){
-				alert('Could not login '+ err.reason);
-			}
 
-			if(!result){
-				// problems were had
-			}
-		});
-
-
-
-		/*Meteor.call('isUser', login, function(err, result){
+		Meteor.call('isUser', login, function(err, result){
 			if(err){
 				alert('Could not login '+ err.reason);
 			}
@@ -48,7 +17,7 @@ Template.loginForm.events = {
 			if(result){
 				var token = '';
 
-				Meteor.call('genToken', login.username, function(e, result){
+				Meteor.call('genToken', 'mike', function(e, result){
 					// create login token
 					// token = result;
 				});
@@ -62,7 +31,7 @@ Template.loginForm.events = {
 			else{
 				Meteor.call('setError', 'badCredentials', true);
 			}
-		});*/
+		});
 	}
 };
 

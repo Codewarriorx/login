@@ -6,19 +6,7 @@ Meteor.methods({
 		errors[error] = value;
 		Session.set('error', errors);
 	},
-	logUserIn: function(credentials){
-		
-	},
-	isLoggedIn: function(token){
+	setSessions: function(token){
 
-	},
-	setSessions: function(token, username){
-		var credentials = {
-			token: token,
-			username: username
-		};
-
-		Session.set('credentials', credentials);
-		localStorage.credentials = credentials;
 	}
 });
