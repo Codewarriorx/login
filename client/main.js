@@ -1,5 +1,5 @@
-Users = new Meteor.Collection('users');
-// LoggedIn = new Meteor.Collection('loggedIn');
+// Users = new Meteor.Collection('users');
+LoggedIn = new Meteor.Collection('loggedIn');
 
 Session.set('error', {});
 
@@ -12,4 +12,8 @@ Template.hello.events = {
 		delete localStorage.username;
 		Session.set('userName', undefined);
 	}
-}
+};
+
+Template.userList.users = function(){
+	return LoggedIn.find({});
+};

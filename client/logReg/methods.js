@@ -6,7 +6,13 @@ Meteor.methods({
 		errors[error] = value;
 		Session.set('error', errors);
 	},
-	setSessions: function(token){
+	setSessions: function(token, username){
+		var credentials = {
+			username: username,
+			token: token
+		};
 
+		Session.set('credentials', credentials);
+		localStorage.credentials = JSON.stringify(credentials);
 	}
 });

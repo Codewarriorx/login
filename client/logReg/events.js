@@ -9,27 +9,20 @@ Template.loginForm.events = {
 			password: tpl.find('input[name="password"]').value
 		};
 
-		Meteor.call('isUser', login, function(err, result){
+		Meteor.call('login', login, function(err, result){
 			if(err){
 				alert('Could not login '+ err.reason);
-			}
-
-			if(result){
-				var token = '';
-
-				Meteor.call('genToken', 'mike', function(e, result){
-					// create login token
-					// token = result;
-				});
-
-				// log user in
-				Session.set('userName', login.username);
-				localStorage.username = login.username;
-
-				Meteor.call('setError', 'badCredentials', false);
+				Meteor.call('setError', 'badCredentials', true);
 			}
 			else{
-				Meteor.call('setError', 'badCredentials', true);
+				if(result != false){ // is there a token?
+					Meteor.call('setError', 'badCredentials', false);
+					Meteor.call('setSessions', result, login.username);
+				}
+				else{ // bad credentials
+					console.log('failed');
+					Meteor.call('setError', 'badCredentials', true);
+				}
 			}
 		});
 	}

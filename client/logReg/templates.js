@@ -1,8 +1,10 @@
 /* 			Templates			*/
 Template.main.loggedIn = function(){
 	// check if already logged in and set session
-	if(typeof localStorage.username != 'undefined'){
-		Session.set('userName', localStorage.username);
+	if(typeof localStorage.credentials != 'undefined'){
+		// Session.set('userName', localStorage.username);
+		// get credentials
+		// localStorage.credentials
 	}
 
 	// check if logged in
