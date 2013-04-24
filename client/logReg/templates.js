@@ -1,15 +1,8 @@
 /* 			Templates			*/
 Template.main.loggedIn = function(){
-	// check if already logged in and set session
-	if(typeof localStorage.credentials != 'undefined'){
-		// Session.set('userName', localStorage.username);
-		// get credentials
-		// localStorage.credentials
-	}
-
 	// check if logged in
-	if(typeof Session.get('userName') != 'undefined'){
-		Template.hello.userName = Session.get('userName');
+	if(typeof Session.get('credentials') != 'undefined'){
+		Template.hello.userName = Session.get('credentials').username;
 		return true;
 	}
 	else{

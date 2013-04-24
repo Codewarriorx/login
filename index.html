@@ -13,6 +13,7 @@
 		{{> loginForm}}
 		{{> regForm}}
 	  {{/if}}
+	  {{> userList}}
 </template>
 
 <template name="hello">
@@ -20,4 +21,12 @@
   <form>
   	<a href="#" id="logout">Logout</a>
   </form>
+</template>
+
+<template name="userList">
+	<ul>
+		{{#each users}}
+			<li>{{name}} - {{token}}</li>
+		{{/each}}
+	</ul>
 </template>

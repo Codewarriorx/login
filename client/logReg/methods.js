@@ -13,6 +13,7 @@ Meteor.methods({
 		};
 
 		Session.set('credentials', credentials);
-		localStorage.credentials = JSON.stringify(credentials);
+		localStorage.setItem('credentials', JSON.stringify(credentials));
+		console.log('sessions set');
 	}
 });
