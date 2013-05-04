@@ -11,6 +11,7 @@
 <template name="regForm">
 	<h2>Register</h2>
 	<form>
+		<span class="error">{{regFeedback}}</span><br>
 		Username:<input type="text" name="username"><span class="feedback">{{usernameFeedback}}</span><br>
 		Password:<input type="text" name="password"><br>
 		Confirm Password:<input type="text" name="password2"><span class="feedback">{{pwFeedback}}</span><br>

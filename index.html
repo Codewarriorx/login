@@ -1,32 +1,50 @@
 <head>
-  <title>login</title>
+	<title>login</title>
 </head>
 
 <body>
-  {{> main}}
+	{{> main}}
 </body>
 
 <template name="main">
-	  {{#if loggedIn}}
+	{{#if loggedIn}}
 		{{> hello}}
-	  {{else}}
+		{{> chat}}
+	{{else}}
 		{{> loginForm}}
 		{{> regForm}}
-	  {{/if}}
-	  {{> userList}}
+	{{/if}}
+	{{> userList}}
 </template>
 
 <template name="hello">
-  <h1>Welcome {{userName}}</h1>
-  <form>
-  	<a href="#" id="logout">Logout</a>
-  </form>
+	<h1>Welcome {{userName}}</h1>
+	<p></p>
+	<form>
+		<a href="#" id="logout">Logout</a>
+	</form>
 </template>
 
 <template name="userList">
+	<h3>Active Users</h3>
 	<ul>
 		{{#each users}}
-			<li>{{name}} - {{token}}</li>
+			<li><a href="#" class="challege">{{name}}</li>
 		{{/each}}
 	</ul>
+</template>
+
+<template name="chat">
+	<h4>Chat</h4>
+	<div class="messageList" id="mainChat">
+		{{#each mainMessages}}
+			<p>{{username}}: {{message}}</p>
+		{{/each}}
+	</div>
+	<div>
+		<form>
+			<input type="text" id="message">
+			<input class="btn" type="submit" value="Enter">
+		</form>
+	</div>
 </template>

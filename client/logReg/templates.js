@@ -1,14 +1,19 @@
 /* 			Templates			*/
-Template.main.loggedIn = function(){
-	// check if logged in
-	if(typeof Session.get('credentials') != 'undefined'){
-		Template.hello.userName = Session.get('credentials').username;
-		return true;
-	}
-	else{
-		return false;
-	}
-};
+Deps.autorun(function () {
+	Template.main.loggedIn = function(){
+		// check if logged in
+		console.log('template update');
+		if(typeof Session.get('credentials') != 'undefined'){
+			console.log('yay');
+			Template.hello.userName = Session.get('credentials').username;
+			return true;
+		}
+		else{
+			console.log('nay');
+			return false;
+		}
+	};
+});
 
 Template.regForm.pwFeedback = function(){
 	if(Session.get('error').passwordMatch){
@@ -24,9 +29,20 @@ Template.regForm.usernameFeedback = function(){
 	return '';
 };
 
+Template.regForm.regFeedback = function(){
+	if(Session.get('error').fieldsAreBlank){
+		return 'Fields are not complete';
+	}
+	return '';
+};
+
 Template.loginForm.loginFeedback = function(){
 	if(Session.get('error').badCredentials){
 		return 'Incorrect credentials';
 	}
 	return '';
+};
+
+Template.chat.mainMessages = function(){
+	return MainChat.find({});
 };
