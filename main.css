@@ -1,1 +1,15 @@
 /* CSS declarations go here */
+.main{
+	width: 300px;
+	padding: 15px;
+	margin: 0 auto;
+}
+
+.messageList{
+	max-height: 350px;
+	overflow-y: scroll; 
+}
+
+form input[type="text"]{
+	margin-bottom: 0;
+}
