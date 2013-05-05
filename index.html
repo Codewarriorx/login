@@ -9,6 +9,7 @@
 <template name="main">
 	{{#if loggedIn}}
 		{{> hello}}
+		{{> challenges}}
 		{{> chat}}
 	{{else}}
 		{{> loginForm}}
@@ -30,6 +31,15 @@
 	<ul>
 		{{#each users}}
 			<li><a href="#" class="challege">{{name}}</li>
+		{{/each}}
+	</ul>
+</template>
+
+<template name="challenges">
+	<h3>My Challenges</h3>
+	<ul>
+		{{#each challenges}}
+			<li>Challenger: {{challenger.name}}</li>
 		{{/each}}
 	</ul>
 </template>

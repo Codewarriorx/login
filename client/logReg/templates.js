@@ -15,6 +15,10 @@ Deps.autorun(function () {
 	};
 });
 
+Template.challenges.challenges = function(){
+	return Challenges.find();
+};
+
 Template.regForm.pwFeedback = function(){
 	if(Session.get('error').passwordMatch){
 		return 'Passwords do not match or are empty';

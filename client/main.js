@@ -30,9 +30,14 @@ Template.userList.users = function(){
 };
 
 Meteor.autorun(function(){
+	if(Session.get('credentials')){
+		var token = Session.get('credentials').token;
+		var name = Session.get('credentials').username;
+		Meteor.subscribe('challenges', token, name);
+	}
 	Meteor.subscribe('loggedIn');
 	Meteor.subscribe('mainMessages');
-	Meteor.subscribe('challenges');
+	
 });
 
 Meteor.setInterval(function(){ // this checks to see if user is logged in

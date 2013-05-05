@@ -21,8 +21,23 @@ Meteor.setInterval(function(){ // this cleans out logged in users every 2 minute
 		var diff = Date.now() - time;
 		var seconds = diff / 1000;
 
-		if(seconds > 100){ // have they been inactive for 10 minutes?
+		if(seconds > 300){ // have they been inactive for 5 minutes?
 			LoggedIn.remove(user._id);
+		}
+	});
+}, 120000);
+
+Meteor.setInterval(function(){ // this cleans out challenges every 1 minutes for now
+	console.log('Cleaning old challenges');
+	var challenges = Challenges.find({}).fetch();
+
+	_.each(challenges, function(challenge){
+		var time = challenge.timestamp;
+		var diff = Date.now() - time;
+		var seconds = diff / 1000;
+
+		if(seconds > 60){ // 1 minute old?
+			Challenges.remove(challenge._id);
 		}
 	});
 }, 60000);
@@ -55,7 +70,7 @@ Meteor.methods({
 					token = result;
 				});
 
-				LoggedIn.insert({ name: credentials.username, token: token });
+				LoggedIn.insert({ name: credentials.username, token: token, uid: data[0]._id });
 				return token;
 			}
 			else{
@@ -161,7 +176,7 @@ Meteor.methods({
 });
 
 Meteor.publish('loggedIn', function(){
-	var records = LoggedIn.find({}, {fields: {name:1}});
+	var records = LoggedIn.find({}, {fields: {name:1, uid:1}});
 	return records;
 });
 
@@ -170,7 +185,14 @@ Meteor.publish('mainMessages', function(){
 	return records;
 });
 
-Meteor.publish('challenges', function(){
-	var records = Challenges.find({});
+Meteor.publish('challenges', function(token, name){
+	console.log(token);
+	var records = Challenges.find({ challengee: {uid: getIdFromToken(token), name: name} });
 	return records;
 });
+
+getIdFromToken = function(token){
+	var firstBit = token.substr(40, token.length);
+	var id = firstBit.substr(firstBit.length-27, 17);
+	return id;
+};

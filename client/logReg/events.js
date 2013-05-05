@@ -47,16 +47,22 @@ Template.chat.events = {
 Template.userList.events = {
 	'click a': function(e, tpl){
 		e.preventDefault();
+		// alert('Challenging: '+this.name);
+		var which = this;
+		var challengerName = Session.get('credentials').username;
 
-		console.log('clicked challenge: ');
-		console.log(this);
-		alert('Challenge: '+this.name);
+		Meteor.call('getIdFromToken', Session.get('credentials').token, function(err, challengerID){
+			console.log('Challege');
+			var challenge = {
+				challenger: { uid: challengerID, name: challengerName },
+				challengee: { uid: which.uid, name: which.name },
+				timestamp: Date.now()
+			};
 
-		var id = Meteor.call('getIdFromToken','03ace924c7e74a59e5a4f790b8542845f6863aba6d696b65osccJEAGhDCyFLw5t6g118h45ee', function(err, result){
-			console.log(result);
+
+			Challenges.insert(challenge);
+			console.log(Challenges.find().fetch());
 		});
-
-		// Challenges.insert({ challenger: , challengee: , timestamp: Date.now() })
 	}
 };
 
