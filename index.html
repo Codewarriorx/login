@@ -1,60 +1,81 @@
 <head>
-	<title>login</title>
+	<title>Scorched HTML</title>
 </head>
 
 <body>
-	{{> main}}
+	<div class="container_12">
+		<div class="section"><h1 class="title">Scorched HTML</h1></div>
+		<div class="clear"></div>
+		{{> main}}
+	</div>
 </body>
 
 <template name="main">
 	{{#if loggedIn}}
-		{{> hello}}
-		{{> challenges}}
-		{{> chat}}
+		<div class="clear"></div>
+		<div class="grid_4">
+			{{> hello}}
+			{{> challenges}}
+			{{> userList}}
+		</div>
+		<div class="grid_8">{{> chat}}</div>
 	{{else}}
-		{{> loginForm}}
-		{{> regForm}}
+		<div class="grid_2"><p></p></div>
+		<div class="grid_4">{{> loginForm}}</div>
+		<div class="grid_4">{{> regForm}}</div>
+		<div class="grid_2"><p></p></div>
 	{{/if}}
-	{{> userList}}
 </template>
 
 <template name="hello">
-	<h1>Welcome {{userName}}</h1>
-	<p></p>
-	<form>
-		<a href="#" id="logout">Logout</a>
-	</form>
+	<div class="section">
+		<h2>Welcome {{userName}}</h2>
+		<div id="stats">
+			<h4>Stats:</h4>
+			<span>Games: 2</span>
+			<span>Wins: 1 (50%)</span>
+		</div>
+		<a href="#" id="logout" class="button">Logout</a>
+	</div>
 </template>
 
 <template name="userList">
-	<h3>Active Users</h3>
-	<ul>
-		{{#each users}}
-			<li><a href="#" class="challege">{{name}}</li>
-		{{/each}}
-	</ul>
+	<div class="section">
+		<h4>Active Users</h4>
+		<div class="sideList">
+			{{#each users}}
+				<a href="#" class="challege">{{name}}</a>
+			{{/each}}
+		</div>
+	</div>
 </template>
 
 <template name="challenges">
-	<h3>My Challenges</h3>
-	<ul>
-		{{#each challenges}}
-			<li>Challenger: {{challenger.name}}</li>
-		{{/each}}
-	</ul>
+	<div class="section">
+		<h4>My Challenges</h4>
+		<div class="sideList">
+			{{#each challenges}}
+				<a href="#" class="challege">Challenger: {{challenger.name}}</a>
+			{{/each}}
+		</div>
+	</div>
 </template>
 
 <template name="chat">
-	<h4>Chat</h4>
-	<div class="messageList" id="mainChat">
-		{{#each mainMessages}}
-			<p>{{username}}: {{message}}</p>
-		{{/each}}
-	</div>
-	<div>
-		<form>
-			<input type="text" id="message">
-			<input class="btn" type="submit" value="Enter">
-		</form>
+	<div class="section">
+		<h4>Chat</h4>
+		<div class="messageList" id="mainChat">
+			<div class="innerChat">
+				{{#each mainMessages}}
+					<p><span class="user">{{username}}:</span> {{message}}</p>
+				{{/each}}
+			</div>
+		</div>
+		<div>
+			<form>
+				<input type="text" id="message" autocomplete="off">
+				<input class="btn button" type="submit" value="Enter">
+			</form>
+		</div>
 	</div>
 </template>

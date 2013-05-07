@@ -1,15 +1,169 @@
-/* CSS declarations go here */
+body{
+	background-color: #e0e0da;
+	color: #51565D;
+	font-family: 'Monda', sans-serif;
+}
+
 .main{
 	width: 300px;
 	padding: 15px;
 	margin: 0 auto;
 }
 
+.title{
+	text-align: center;
+}
+
+.challege{
+	padding: 10px;
+	display: block;
+	text-decoration: none;
+	background-color: #e0e0da;
+
+	transition:All .6s ease;
+	-webkit-transition:All .6s ease;
+	-moz-transition:All .6s ease;
+	-o-transition:All .6s ease;
+}
+
+.challege:hover{
+	background-color: #edede9;
+	color: #383df3;
+}
+
+.sideList{
+	max-height: 158px;
+	overflow-y: scroll;
+}
+/* .chatContainer{
+	background-color: #F3F3F1;
+	padding: 15px;
+	border-bottom: 1px solid #bdbdb0;
+} */
+
+.section > h4{
+	border-bottom: 1px solid #D2D2CA;
+	margin: 0;
+}
+
 .messageList{
-	max-height: 350px;
-	overflow-y: scroll; 
+	max-height: 561px;
+	overflow-y: scroll;
+}
+
+.messageList p{
+	background-color: #e0e0da;
+	padding: 10px;
+	line-height: 22px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.user{
+	background-color: #b1b1af;
+	padding: 2px 5px;
+}
+
+.section{
+	background-color: #F3F3F1;
+	padding: 15px;
+	border-bottom: 1px solid #bdbdb0;
+	margin-bottom: 5px;
+	overflow: auto;
+}
+
+#message{
+	width: 420px;
+	margin-left: 10px;
+	margin-right: 50px;
+
 }
 
 form input[type="text"]{
 	margin-bottom: 0;
+}
+
+.button{
+	background-color: #9f9f8e;
+	font-family: 'Monda', sans-serif;
+	border: none;
+	padding: 8px 30px;
+	color: #51565D;
+	text-decoration: none;
+	position: relative;
+	/*left: 60px;*/
+	cursor: pointer;
+
+	transition:All .6s ease;
+	-webkit-transition:All .6s ease;
+	-moz-transition:All .6s ease;
+	-o-transition:All .6s ease;
+}
+
+.button:hover{
+	background-color: #b0b0a2;
+	color: #383df3;
+}
+
+/*				Login Styles					*/
+#logReg{
+	background-color: #F3F3F1;
+	padding: 20px;
+	margin-top: 50px;
+	clear: both;
+	overflow: auto;
+	border-bottom: 1px solid #bdbdb0;
+}
+
+#logReg > h2{
+	border-bottom: 1px solid #D2D2CA;
+}
+
+#logReg .button{
+	float: right;
+	left: 0;
+	margin-top: 5px;
+}
+
+#logReg .inputLabel{
+	float: left;
+	width: 120px;
+	height: 24px;
+}
+
+#logReg .input{
+	float: right;
+	height: 24px;
+}
+
+#logReg .input > input{
+	width: 120px;
+}
+
+#logReg .input, #logReg .inputLabel{
+	margin-bottom: 5px;
+}
+
+.mainButton{
+	background-color: #393939;
+	color: #fff;
+}
+
+.mainButton:hover{
+	background-color: #393939;
+	color: #debb42;
+}
+
+#stats h4{
+	margin-bottom: 10px;
+}
+
+#stats span{
+	display: block;
+}
+
+#stats + #logout{
+	margin-top: 20px;
+	display: block;
+	text-align: center;
 }

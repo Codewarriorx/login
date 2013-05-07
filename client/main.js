@@ -20,12 +20,11 @@ Template.hello.events = {
 	}
 };
 
-// Template.chat.rendered = function(){
-// 	document.getElementById('MainChat').scrollTop = 10000;
-// };
+Template.chat.rendered = function(){
+	$('#mainChat').scrollTop($('.innerChat').height());
+};
 
 Template.userList.users = function(){
-	// return Session.get('loggedIn');
 	return LoggedIn.find({});
 };
 
@@ -37,7 +36,6 @@ Meteor.autorun(function(){
 	}
 	Meteor.subscribe('loggedIn');
 	Meteor.subscribe('mainMessages');
-	
 });
 
 Meteor.setInterval(function(){ // this checks to see if user is logged in

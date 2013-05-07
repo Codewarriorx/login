@@ -47,7 +47,7 @@ Template.chat.events = {
 Template.userList.events = {
 	'click a': function(e, tpl){
 		e.preventDefault();
-		// alert('Challenging: '+this.name);
+		alert('Challenging: '+this.name);
 		var which = this;
 		var challengerName = Session.get('credentials').username;
 

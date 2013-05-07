@@ -1,20 +1,24 @@
 <template name="loginForm">
-	<h2>Login</h2>
-	<form>
-		<span class="error">{{loginFeedback}}</span><br>
-		Username:<input type="text" name="username"><br>
-		Password:<input type="text" name="password"><br>
-		<input type="submit" value="Login">
-	</form>
+	<div id="logReg">
+		<h2>Login</h2>
+		<form>
+			<p class="error">{{loginFeedback}}</p>
+			<span class="inputLabel">Username:</span><span class="input"><input type="text" name="username"></span>
+			<span class="inputLabel">Password:</span><span class="input"><input type="text" name="password"></span>
+			<input class="button mainButton" type="submit" value="Login">
+		</form>
+	</div>
 </template>
 
 <template name="regForm">
-	<h2>Register</h2>
-	<form>
-		<span class="error">{{regFeedback}}</span><br>
-		Username:<input type="text" name="username"><span class="feedback">{{usernameFeedback}}</span><br>
-		Password:<input type="text" name="password"><br>
-		Confirm Password:<input type="text" name="password2"><span class="feedback">{{pwFeedback}}</span><br>
-		<input type="submit" value="Register">
-	</form>
+	<div id="logReg">
+		<h2>Register</h2>
+		<form>
+			<span class="error">{{regFeedback}}</span>
+			<span class="inputLabel">Username:</span><span class="input"><input type="text" name="username"></span><span class="feedback">{{usernameFeedback}}</span>
+			<span class="inputLabel">Password:</span><span class="input"><input type="text" name="password"></span>
+			<span class="inputLabel">Confirm Password:</span><span class="input"><input type="text" name="password2"></span><span class="feedback">{{pwFeedback}}</span>
+			<input class="button mainButton" type="submit" value="Register">
+		</form>
+	</div>
 </template>
