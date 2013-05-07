@@ -3,7 +3,7 @@ Deps.autorun(function () {
 	Template.main.loggedIn = function(){
 		// check if logged in
 		console.log('template update');
-		if(typeof Session.get('credentials') != 'undefined'){
+		if(Session.get('credentials')){
 			console.log('yay');
 			Template.hello.userName = Session.get('credentials').username;
 			return true;
@@ -49,4 +49,11 @@ Template.loginForm.loginFeedback = function(){
 
 Template.chat.mainMessages = function(){
 	return MainChat.find({});
+};
+
+Template.main.inGame = function(){
+	// Games.find({ 'challenger.uid':  })
+
+	return false;
+
 };

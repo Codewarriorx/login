@@ -2,6 +2,19 @@ Users = new Meteor.Collection('users');
 LoggedIn = new Meteor.Collection('loggedIn');
 MainChat = new Meteor.Collection('mainMessages');
 Challenges = new Meteor.Collection('challenges');
+Games = new Meteor.Collection('games');
+
+/* 		Security Time!	Don't need to setup yet since still testing		*/
+Users.deny({
+
+});
+
+Meteor.startup(function(){
+    LoggedIn.remove({});
+    Challenges.remove({});
+    Games.remove({});
+    MainChat.remove({});
+});
 
 if(Meteor.isServer && MainChat.find().count() == 0){
 	MainChat.insert({ username: 'Dan', message: 'hello', timestamp: '1366945305275' });
@@ -43,6 +56,31 @@ Meteor.setInterval(function(){ // this cleans out challenges every 1 minutes for
 }, 60000);
 
 Meteor.methods({
+	createChallenge: function(which, challengerName, uid){
+		var challenge = {
+			challenger: { uid: uid, name: challengerName },
+			challengee: { uid: which.uid, name: which.name },
+			timestamp: Date.now()
+		};
+
+		Challenges.insert(challenge);
+		return true;
+	},
+	createGame: function(which){
+		var game = {
+			numberOfPlayers: 2,
+			uidTurn: which.challengee.uid,
+			challengee: which.challengee,
+			challenger: which.challenger,
+			timestamp: Date.now()
+		};
+
+		Games.insert(game);
+		return true;
+	},
+	getTime: function(){
+		return Date.now();
+	},
 	checkLogin: function(credentials){
 		console.log('function: checkLogin');
 		
@@ -71,7 +109,13 @@ Meteor.methods({
 				});
 
 				LoggedIn.insert({ name: credentials.username, token: token, uid: data[0]._id });
-				return token;
+
+				var obj = {
+					token: token,
+					uid: data[0]._id
+				};
+
+				return obj;
 			}
 			else{
 				return false;
@@ -185,9 +229,14 @@ Meteor.publish('mainMessages', function(){
 	return records;
 });
 
-Meteor.publish('challenges', function(token, name){
-	console.log(token);
-	var records = Challenges.find({ challengee: {uid: getIdFromToken(token), name: name} });
+Meteor.publish('games', function(){
+	var records = Games.find({});
+	return records;
+});
+
+Meteor.publish('challenges', function(uid){
+	console.log(uid);
+	var records = Challenges.find({ 'challengee.uid': uid });
 	return records;
 });
 

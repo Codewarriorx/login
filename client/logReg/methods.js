@@ -6,11 +6,12 @@ Meteor.methods({
 		errors[error] = value;
 		Session.set('error', errors);
 	},
-	setSessions: function(token, username){
+	setSessions: function(obj, username){ // obj {tokem, uid}
 		console.log('function: setSessions');
 		var credentials = {
 			username: username,
-			token: token
+			token: obj.token,
+			uid: obj.uid
 		};
 
 		Session.set('credentials', credentials);
@@ -30,11 +31,11 @@ loggedLocal = function(){
 		Meteor.call('checkLogin', localStorage.credentials, function(err, result){
 			if(result){
 				var credentials = JSON.parse(localStorage.credentials);
-				Meteor.call('setSessions', credentials.token, credentials.username);
+				Meteor.call('setSessions', credentials, credentials.username);
 
 				Template.hello.userName = Session.get('credentials').username;
 
-				Template.main.loggedIn = true;
+				// Template.main.loggedIn = true; // this appears to be what was breaking logout
 			}
 			else{
 				logoutLocal();
@@ -45,8 +46,7 @@ loggedLocal = function(){
 
 logoutLocal = function(){
 	console.log('function: logoutLocal');
-	// logout on server
-	Meteor.call('logout', localStorage.credentials);
+	Meteor.call('logout', localStorage.credentials); // logout on server
 
 	delete localStorage.credentials;
 	Session.set('credentials', undefined);

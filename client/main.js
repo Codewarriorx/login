@@ -1,10 +1,10 @@
 LoggedIn = new Meteor.Collection('loggedIn');
 MainChat = new Meteor.Collection('mainMessages');
 Challenges = new Meteor.Collection('challenges');
+Games = new Meteor.Collection('games');
 
 // do intial check if user is logged in on the server
 Meteor.startup(function(){
-	console.log('startup');
 	loggedLocal();
 });
 
@@ -30,12 +30,12 @@ Template.userList.users = function(){
 
 Meteor.autorun(function(){
 	if(Session.get('credentials')){
-		var token = Session.get('credentials').token;
-		var name = Session.get('credentials').username;
-		Meteor.subscribe('challenges', token, name);
+		var uid = Session.get('credentials').uid;
+		Meteor.subscribe('challenges', uid);
 	}
 	Meteor.subscribe('loggedIn');
 	Meteor.subscribe('mainMessages');
+	Meteor.subscribe('games');
 });
 
 Meteor.setInterval(function(){ // this checks to see if user is logged in

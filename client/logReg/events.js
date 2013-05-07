@@ -47,24 +47,35 @@ Template.chat.events = {
 Template.userList.events = {
 	'click a': function(e, tpl){
 		e.preventDefault();
-		alert('Challenging: '+this.name);
+
 		var which = this;
 		var challengerName = Session.get('credentials').username;
+		var uid = Session.get('credentials').uid;
 
-		Meteor.call('getIdFromToken', Session.get('credentials').token, function(err, challengerID){
-			console.log('Challege');
-			var challenge = {
-				challenger: { uid: challengerID, name: challengerName },
-				challengee: { uid: which.uid, name: which.name },
-				timestamp: Date.now()
-			};
-
-
-			Challenges.insert(challenge);
-			console.log(Challenges.find().fetch());
+		Meteor.call('createChallenge', which, challengerName, uid, function(err, result){
+			if(!err && result){
+				// it was good
+				alert('Challenging: '+which.name);
+			}
 		});
 	}
 };
+
+Template.challenges.events = {
+	'click a': function(e, tpl){
+		e.preventDefault();
+		var which = this;
+
+		if(confirm('Are you sure you want to accept this challenge?')){
+			Meteor.call('createGame', which, function(err, result){
+				if(!err && result){
+					// it was good
+					console.log('Game created successfully');
+				}
+			});
+		}
+	}
+}
 
 Template.regForm.events = {
 	'submit': function(e, tpl){
@@ -100,7 +111,9 @@ Template.regForm.events = {
 				}
 				// use error code to set reg form error message
 			}
-			
+			else{ // registration was successful
+				alert('You have been successfully registered! Please login.');
+			}
 		});
 	}
 };
