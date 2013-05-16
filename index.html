@@ -18,10 +18,14 @@
 				{{> gameRoom}}
 			</div>
 			<div class="clear"></div>
-			<div class="grid_4">
-				{{> userList}}
+			<div class="grid_12">
+				{{> controls}}
 			</div>
-			<div class="grid_8">{{> chat}}</div>
+			<div class="clear"></div>
+			<div class="grid_4">
+				{{> gameMessages}}
+			</div>
+			<div class="grid_8">{{> gameChat}}</div>
 		{{else}}
 			<div class="clear"></div>
 			<div class="grid_4">
@@ -54,12 +58,9 @@
 <template name="gameRoom">
 	<div class="section">
 		<h2>Gameroom!</h2>
-		<div id="stats">
-			<h4>Stats:</h4>
-			<span>Games: 2</span>
-			<span>Wins: 1 (50%)</span>
+		<div id="game">
+			
 		</div>
-		<a href="#" id="logout" class="button">Logout</a>
 	</div>
 </template>
 
@@ -71,6 +72,18 @@
 				<a href="#" class="challege">{{name}}</a>
 			{{/each}}
 		</div>
+	</div>
+</template>
+
+<template name="gameMessages">
+	<div class="section">
+		<h4>Game Messages</h4>
+		<div class="sideList">
+			{{#each users}}
+				<a href="#" class="challege">{{name}}</a>
+			{{/each}}
+		</div>
+		<a href="#" id="exit" class="button">Exit Game</a>
 	</div>
 </template>
 
@@ -99,6 +112,37 @@
 			<form>
 				<input type="text" id="message" autocomplete="off">
 				<input class="btn button" type="submit" value="Enter">
+			</form>
+		</div>
+	</div>
+</template>
+
+<template name="gameChat">
+	<div class="section">
+		<h4>Chat</h4>
+		<div class="messageList" id="mainChat">
+			<div class="innerChat">
+				{{#each mainMessages}}
+					<p><span class="user">{{username}}:</span> {{message}}</p>
+				{{/each}}
+			</div>
+		</div>
+		<div>
+			<form>
+				<input type="text" id="message" autocomplete="off">
+				<input class="btn button" type="submit" value="Enter">
+			</form>
+		</div>
+	</div>
+</template>
+
+<template name="controls">
+	<div class="section">
+		<div>
+			<form>
+				Power (1-100): <input type="text" id="power" autocomplete="off">
+				Angle (0-180): <input type="text" id="angle" autocomplete="off">
+				<input class="btn button" type="submit" value="Fire!">
 			</form>
 		</div>
 	</div>

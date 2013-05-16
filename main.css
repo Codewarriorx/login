@@ -167,3 +167,8 @@ form input[type="text"]{
 	display: block;
 	text-align: center;
 }
+
+#game{
+	width: 910px;
+	height: 500px;
+}

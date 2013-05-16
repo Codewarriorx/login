@@ -12,7 +12,7 @@ Users.deny({
 Meteor.startup(function(){
     LoggedIn.remove({});
     Challenges.remove({});
-    Games.remove({});
+    // Games.remove({});
     MainChat.remove({});
 });
 
@@ -216,6 +216,9 @@ Meteor.methods({
 	},
 	hexToDec: function(hex){
 		return parseInt(hex,16);
+	},
+	fireBullet: function(){
+		
 	}
 });
 
