@@ -52,8 +52,8 @@ Template.chat.mainMessages = function(){
 };
 
 Template.main.inGame = function(){
-	// Games.find({ 'challenger.uid':  })
+	var credentials = Session.get('credentials');
+	var games = Games.find({ $or: [{'challenger.uid': credentials.uid}, {'challengee.uid': credentials.uid}] }).fetch();
 
-	return false;
-
+	return games.length > 0;
 };
